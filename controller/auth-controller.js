@@ -1,7 +1,12 @@
 const User = require("../model/auth");
 const appError = require("../utility/appError");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
+const uploadProfileImage = (req, res, next) => {
+  res.status(201).json({ status: "SUCCESSFULLY REGISTERED!", data: req.file });
+};
 const register = async (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
   //   if (!isValidPassword(password)) {
@@ -65,4 +70,5 @@ const login = async (req, res, next) => {
 module.exports = {
   register,
   login,
+  uploadProfileImage,
 };
