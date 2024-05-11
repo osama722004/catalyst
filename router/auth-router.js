@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const usersController = require('../controller/auth-controller');
+const { validateUser, handleValidationErrors } =require('../middleware/userValidationSchema');
+
+router.route('/register')
+            .post(validateUser,handleValidationErrors,usersController.register)
+router.route('/login')
+            .post(usersController.login)
+// router.route('/logout')
+//             .get(usersController.logout)
+module.exports = router;
