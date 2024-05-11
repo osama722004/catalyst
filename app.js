@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const db = require("./db.js");
 const cors = require("cors");
-const compressing = require("compressing");
-app.use(compressing());
+const compression = require("compression");
 app.use(cors());
 app.use(express.json());
+app.use(compression());
 const projectRouter = require("./router/project-router.js");
 const usersRouter = require("./router/auth-router.js");
 const stockRouter = require("./router/stock-router.js");
@@ -20,14 +20,12 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
-  res
-    .status(error.statusCode || 500)
-    .json({
-      status: error.statusText || "error",
-      message: error.message,
-      code: error.statusCode || 500,
-      data: null,
-    });
+  res.status(error.statusCode || 500).json({
+    status: error.statusText || "error",
+    message: error.message,
+    code: error.statusCode || 500,
+    data: null,
+  });
 });
 
 app.listen(5000, () => {
