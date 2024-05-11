@@ -4,13 +4,13 @@ const bcrypt = require("bcryptjs");
 
 const register = async (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
-  if (!isValidPassword(password)) {
-    return res
-      .status(400)
-      .send(
-        "Password must be at least 6 characters long and contain characters, numbers, and symbols"
-      );
-  }
+//   if (!isValidPassword(password)) {
+//     return res
+//       .status(400)
+//       .send(
+//         "Password must be at least 6 characters long and contain characters, numbers, and symbols"
+//       );
+//   }
 
   const oldUser = await User.findOne({ email: email });
   if (oldUser) {
@@ -30,11 +30,11 @@ const register = async (req, res, next) => {
     .json({ status: "SUCCESSFULLY REGISTERED!", data: { user: newUser } });
 };
 
-function isValidPassword(password) {
-  return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(
-    password
-  );
-}
+// function isValidPassword(password) {
+//   return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(
+//     password
+//   );
+// }
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
