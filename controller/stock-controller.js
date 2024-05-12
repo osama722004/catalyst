@@ -22,7 +22,7 @@ const getStocks=async(req, res)=> {
 
 const addStock=async(req, res) =>{
     try {
-        const { type, amount, price} = req.body;
+        const { amount, price} = req.body;
         const newStock = new Stock({
             type,
             amount,

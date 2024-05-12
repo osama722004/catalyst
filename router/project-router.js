@@ -6,7 +6,7 @@ const { validateProject ,handleValidationErrors } = require('../middleware/proje
 
 router.route('/')
             .get(projectController.getAllProjects)
-            .post(validateProject,handleValidationErrors,projectController.addProject)
+            .post(handleValidationErrors,projectController.addProject)
 router.route('/:id')
             .get(projectController.getProject)
             .patch(projectController.updateProject)
